@@ -1,6 +1,6 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 
-pragma solidity ^0.6.0;
+pragma solidity >=0.6.0;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/GSN/Context.sol";
@@ -224,6 +224,7 @@ contract Crowdsale is Context, ReentrancyGuard {
     function _getTokenAmount(uint256 weiAmount)
         internal
         view
+        virtual
         returns (uint256)
     {
         return weiAmount.mul(_rate);
@@ -232,7 +233,7 @@ contract Crowdsale is Context, ReentrancyGuard {
     /**
      * @dev Determines how ETH is stored/forwarded on purchases.
      */
-    function _forwardFunds() internal virtual {
+    function _forwardFunds() internal {
         _wallet.transfer(msg.value);
     }
 }
